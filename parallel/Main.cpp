@@ -10,6 +10,7 @@ int main() {
     // Create a SeriesCircuit object
     SeriesCircuit circuit;
     SeriesCircuit circuit2;
+    SeriesCircuit circuit3;
     ParallelCircuit Pcircuit;
 
     // Given values for components and source
@@ -26,6 +27,10 @@ int main() {
     double L2 = 0.01;
     double C2 = 0.001;
 
+    double R5 = 220;
+    double R6 = 1000;
+    double L3 = 0.001;
+    double C3 = 0.001;
 
     // Angular frequency
     double omega = 2 * M_PI * frequency;
@@ -41,9 +46,14 @@ int main() {
     circuit2.addComponent(Complex(0, omega * L2));        // Inductor: Z = jωL
     circuit2.addComponent(Complex(0, -1 / (omega * C2))); // Capacitor: Z = -j/(ωC)
 
+    circuit3.addComponent(Complex(R5, 0));
+    circuit3.addComponent(Complex(R6, 0));               // Resistor 2 (real part only)
+    circuit3.addComponent(Complex(0, omega * L3));        // Inductor: Z = jωL
+    circuit3.addComponent(Complex(0, -1 / (omega * C3))); // Capacitor: Z = -j/(ωC)
 
     Pcircuit.addline(circuit.getTotalImpedance());
     Pcircuit.addline(circuit2.getTotalImpedance());
+    Pcircuit.addline(circuit3.getTotalImpedance());
 
     Pcircuit.getTotalImpedance();
     cout << "total impedance of this circuit is " << Pcircuit.getTotalImpedance() << " Ohm" << endl;

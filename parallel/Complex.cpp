@@ -35,10 +35,12 @@ Complex Complex::operator*(const Complex& other) {
 // Overload the / operator to divide two complex numbers
 // Complex Complex::operator/(const Complex& other) {
 Complex Complex::operator/(const Complex& other) {
-    double realPart = ((real * other.real) + (imag * other.imag)) / (other.real * other.real) + (other.imag * other.imag);
-    double imagPart = ((imag * other.real) - (real * other.imag)) / (other.real * other.real) + (other.imag * other.imag);
+    double denominator = other.real * other.real + other.imag * other.imag;
+    double realPart = (real * other.real + imag * other.imag) / denominator;
+    double imagPart = (imag * other.real - real * other.imag) / denominator;
     return Complex(realPart, imagPart);
 }
+
 //}
 // Overload the == operator to compare two complex numbers
 bool Complex::operator==(const Complex& other) {
